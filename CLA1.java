@@ -1,3 +1,8 @@
+/* Program to display two numbers received as command-line arguments.
+@Jubin Joy
+Roll no: 35
+Date:
+*/
 import java.io.*;
 class CLA1{
 	public static void main(String args[])
@@ -7,5 +12,6 @@ class CLA1{
 		n2=Integer.parseInt(args[1]);
 		sum=n1+n2;
 		System.out.println("Sum="+sum);
+
 	}
 }
