@@ -19,30 +19,12 @@ class c1{
         }
         System.out.println("");
     }
-    public int search(int a[],int key){
-        for(int i=0;i<a.length;i++){
-            if(a[i]==key){
-                return i;
-            }
-        }
-        return -1;
-    }
 }
-class ArrFunction{
+class Program5{
     public static void main(String args[]){
         c1 obj=new c1();
         int a[]=null;
         a=obj.read(a);
         obj.disp(a);
-        Scanner s=new Scanner(System.in);
-        System.out.println("Enter the element to search:");
-        int key=s.nextInt();
-        int result=obj.search(a,key);
-        if(result!=-1){
-            System.out.println("Element found at index: "+result);
-        } else {
-            System.out.println("Element not found");
-        }
-        System.out.println("Finished");
     }
 }
