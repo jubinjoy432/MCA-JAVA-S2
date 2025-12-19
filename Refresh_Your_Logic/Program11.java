@@ -14,19 +14,19 @@ class A
     }
     public void add(A obj)
     {
-        System.out.println(n+"+"+obj.n+"=");
+        System.out.print(n+"+"+obj.n+"=");
         n = n + obj.n;
         display();
     }
     public void subtract(A obj)
     {
-        System.out.println(n+"-"+obj.n+"=");
+        System.out.print(n+"-"+obj.n+"=");
         n = n - obj.n;
         display();
     }
     public void multiply(A obj)
     {
-        System.out.println(n+"*"+obj.n+"=");
+        System.out.print(n+"*"+obj.n+"=");
         n = n * obj.n;
         display();
     }
@@ -38,7 +38,7 @@ class A
         }
         else
         {
-            System.out.println(n+"/"+obj.n+"=");
+            System.out.print(n+"/"+obj.n+"=");
             n = n / obj.n;
             display();
         }
