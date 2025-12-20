@@ -3,7 +3,6 @@ class Vehicle {
         System.out.println("I am a Vehicle");
     }
 }
-
 class Engine {
     void start() {
         System.out.println("Engine started");
@@ -26,7 +25,7 @@ class Car extends Vehicle { // ISA: Car is a Vehicle
 public class Program15 {
     public static void main(String[] args) {
         Car myCar = new Car();
-        myCar.displayType();
-        myCar.startCar();
+        myCar.displayType(); // ISA
+        myCar.startCar();    // HASA
     }
 }
