@@ -16,7 +16,7 @@ class UDE extends Exception
         return error;
     }
 }
-class UDEpassword
+class Program24
 {
     public static void main(String args[])
     {

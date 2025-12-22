@@ -50,7 +50,8 @@ class ThreadSearch {
 
             if (i == threads - 1) {
                 end = n;
-            } else {
+            } 
+            else {
                 end = start + 5;
             }
 
