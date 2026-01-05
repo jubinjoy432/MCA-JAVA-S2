@@ -17,6 +17,7 @@ public class FWrite{
                   if(data.equals("quit"))
                     break;
                   fout.write(data.getBytes());
+                  fout.write("\n".getBytes());
                }
                fout.close();
                }
