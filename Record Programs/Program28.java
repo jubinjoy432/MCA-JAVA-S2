@@ -21,7 +21,7 @@ class SearchThread extends Thread {
     }   
 }
 
-class ThreadSearch {
+class Program28 {
     public static void main(String args[]) {
         int index;
         Scanner s = new Scanner(System.in);

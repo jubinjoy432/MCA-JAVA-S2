@@ -19,8 +19,8 @@ class Program25
     public static void main(String args[])
     {
         Cthread t1,t2;
-        t1=new Cthread(200);
-        t2=new Cthread(250);
+        t1=new Cthread(5);
+        t2=new Cthread(7);
         System.out.println("B4 Threading");
         t1.start();
         System.out.println("BW Threading");

@@ -20,8 +20,8 @@ class Program26
     public static void main(String args[])
     {
         Cthread p,q;
-        p=new Cthread(200);
-        q=new Cthread(250);
+        p=new Cthread(5);
+        q=new Cthread(7);
         Thread t1,t2;
         t1=new Thread(p);
         t2=new Thread(q);
