@@ -2,7 +2,7 @@ import java.io.*;
 import java.net.*;
 class MClient
 {
-	public static void main(Sting args[])
+	public static void main(String args[])
 	{
 		try
 		{
@@ -11,13 +11,13 @@ class MClient
 			DataOutputStream sout;
 			sin=new DataInputStream(cs.getInputStream());
 			sout=new DataOutputStream(cs.getOutputStream());
-			kin=new DataInputstream(System.in);
+			kin=new DataInputStream(System.in);
 			for(;;)
 			{
 				String str=sin.readUTF();
 				System.out.println(str);
-				System.out.println("Enter data/quit);
-				str=kin.readLine());
+				System.out.println("Enter data/quit");
+				str=kin.readLine();
 				sout.writeUTF(str);
 				if(str.equals("quit"))
 					break;
