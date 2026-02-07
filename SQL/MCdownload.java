@@ -25,10 +25,11 @@ public class MCdownload {
                 System.out.println("Sent choice: " + choice);
 
                 // Upload file
-                if (choice.equals("1")) {
+                if (choice.equals("1")) 
+                {
                     System.out.println("Enter the file name to upload:");
                     String fn = kin.nextLine();
-                    sout.writeUTF(fn); // send filename
+                    sout.writeUTF(fn); 
                     System.out.println("Sending file: " + fn);
 
                     BufferedReader br = new BufferedReader(new FileReader(fn));
@@ -40,6 +41,11 @@ public class MCdownload {
                     sout.writeUTF("-1"); // EOF marker
                     br.close();
                     System.out.println("File " + fn + " sent successfully.");
+                }
+                if(choice.equals("2"))
+                {
+                    System.out.println("Enter the file name to download:");
+                    String fn = kin.nextLine();
                 }
 
                 if (choice.equals("3")) {
