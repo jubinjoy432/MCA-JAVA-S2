@@ -35,16 +35,25 @@ public class MCdownload {
                     while ((data = fin.read()) != -1) {
                         ch = (char) data;  
                         sout.writeUTF(String.valueOf(ch));
-                        System.out.println("Sent:"+String.valueOf(data));
                     }
                     sout.writeUTF("-1");
                     fin.close();
-                    System.out.println("File " + fn + " sent successfully.");
+                    System.out.println("File " + fn + " Uploaded successfully.");
                 }
                 if(choice.equals("2"))
                 {
                     System.out.println("Enter the file name to download:");
                     String fn = kin.nextLine();
+                    sout.writeUTF(fn);
+                    FileOutputStream fout=new FileOutputStream(fn);
+                    while(true)
+                     {
+                         String data=sin.readUTF();
+                         if(data.equals("-1"))
+                            break;
+                          fout.write(data.getBytes());
+                      }
+                       System.out.println("File " + fn + " Downloaded successfully.");
                 }
 
                 if (choice.equals("3")) {

@@ -23,6 +23,7 @@ class OneClient extends Thread
 				sout.writeUTF("From Server:"+str);
 				str= sin.readUTF();
                 if(str.equals("1"))
+				{
                     fn= sin.readUTF();
                     fout=new FileOutputStream(fn);
                     while(true)
@@ -32,6 +33,22 @@ class OneClient extends Thread
                             break;
                           fout.write(data.getBytes());
                       }
+				}
+				if(str.equals("2"))
+				{
+					fn= sin.readUTF();
+					FileInputStream fin=new FileInputStream(fn);
+                    int data;
+                    char ch;
+                    while ((data = fin.read()) != -1) {
+                        ch = (char) data;  
+                        sout.writeUTF(String.valueOf(ch));
+                    }
+                    sout.writeUTF("-1");
+					fin.close();
+
+
+				}
 				if(str.equals("3"))
 					break;
 				System.out.println("From  Client:"+str);
