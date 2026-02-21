@@ -11,7 +11,7 @@ class FRead{
         System.out.println("Enter the file name:");
         fn=s.nextLine();
         try{
-            fin=new FileInputStream(fn);
+            FileInputStream fin;
             while(true)
             {
                 ch=fin.read();

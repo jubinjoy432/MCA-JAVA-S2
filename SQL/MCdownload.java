@@ -1,7 +1,7 @@
 import java.io.*;
 import java.net.*;
 import java.util.Scanner;
-
+import java.util.*;
 public class MCdownload {
     public static void main(String args[]) {
         try {
@@ -12,19 +12,16 @@ public class MCdownload {
             Scanner kin = new Scanner(System.in);
 
             for (;;) {
-                // read message from server
                 String serverMsg = sin.readUTF();
                 System.out.println(serverMsg);
 
-                // ask user for choice
                 System.out.println("Choose 1.upload 2.download 3.quit:");
                 String choice = kin.nextLine();
                 if(choice.isEmpty()) continue;
 
-                sout.writeUTF(choice); // send menu choice
+                sout.writeUTF(choice);
                 System.out.println("Sent choice: " + choice);
 
-                // Upload file
                 if (choice.equals("1")) 
                 {
                     System.out.println("Enter the file name to upload:");
@@ -32,14 +29,16 @@ public class MCdownload {
                     sout.writeUTF(fn); 
                     System.out.println("Sending file: " + fn);
 
-                    BufferedReader br = new BufferedReader(new FileReader(fn));
-                    String line;
-                    while ((line = br.readLine()) != null) {
-                        sout.writeUTF(line);
-                        System.out.println("Sent line: " + line);
+                    FileInputStream fin=new FileInputStream(fn);
+                    int data;
+                    char ch;
+                    while ((data = fin.read()) != -1) {
+                        ch = (char) data;  
+                        sout.writeUTF(String.valueOf(ch));
+                        System.out.println("Sent:"+String.valueOf(data));
                     }
-                    sout.writeUTF("-1"); // EOF marker
-                    br.close();
+                    sout.writeUTF("-1");
+                    fin.close();
                     System.out.println("File " + fn + " sent successfully.");
                 }
                 if(choice.equals("2"))
