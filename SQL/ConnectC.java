@@ -30,6 +30,5 @@ public class ConnectC
         } catch (SQLException e) {
             e.printStackTrace();
         }
- 
 }
 }
