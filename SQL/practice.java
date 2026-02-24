@@ -1,36 +1,60 @@
-import java.sql.*;
-import java.util.*;
-public class practice {
-    public static void main(String args[])
+import java.io.*;
+import java.net.*;
+class MultiClient extends Thread
+{
+    Socket as;
+    DataInputStream sin;
+    DataOutputStream sout;
+    MultiClient(Socket s) throws Exception
     {
+        as=s;
+        sin=new DataInputStream(as.getInputStream());
+        sout=new DataOutputStream(as.getOutputStream());
+    }
+    public void run()
+    {
+        String str="welcome";
         try
         {
-            String no,na,sal,sql;
-            Scanner s=new Scanner(System.in);
-            Class.forName("oracle.jdbc.OracleDriver");
-            Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","jubin","2002");
-            System.out.println("connected.."+con);
-            Statement st=con.createStatement();
-            PreparedStatement pst=con.prepareStatement("insert into emp values(?,?,?)");
-            System.out.println("Enter eno,ename,esal:");
-            no=s.nextLine();
-            na=s.nextLine();
-            sal=s.nextLine();
-            pst.setInt(1,Integer.parseInt(no));
-            pst.setString(2,na);
-            pst.setFloat(3,Float.parseFloat(sal));
-            pst.execute();
-            sql="select * from emp";
-            ResultSet rs=st.executeQuery(sql);
-            while(rs.next())
+            while(true)
             {
-                 System.out.println(rs.getString(1) + "  " + rs.getString(2)+"  " + rs.getString(3));
+                sout.writeUTF("From server:"+str);
+                if(str.equals("quit"))
+                    break;
+                str=sin.readUTF();
+                System.out.println("Client Says:"+str);
+                if(str.equals("quit"))
+                    break;
             }
-
+         }
+         catch(Exception e)
+         {
+            System.out.println("Error in C:"+e);
+         }
+    }
+}
+ class practice
+ {
+    public static void main(String args[])
+    {
+        ServerSocket ss;
+        try
+        {
+            Socket as;
+            ss=new ServerSocket(1234);
+            while(true)
+            {
+                System.out.println("Server waiting...");
+                as=ss.accept();
+                System.out.println("Client Connected...");
+                MultiClient obj=new MultiClient(as);
+                obj.start();
+            }
         }
         catch(Exception e)
         {
             System.out.println("Error:"+e);
         }
+
     }
-}
+ }
