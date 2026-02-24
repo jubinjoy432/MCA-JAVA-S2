@@ -1,55 +1,24 @@
 import java.io.*;
 import java.net.*;
-class MultiClient extends Thread
-{
-    Socket as;
-    DataInputStream sin;
-    DataOutputStream sout;
-    MultiClient(Socket s) throws Exception
-    {
-        as=s;
-        sin=new DataInputStream(as.getInputStream());
-        sout=new DataOutputStream(as.getOutputStream());
-    }
-    public void run()
-    {
-        String str="welcome";
-        try
-        {
-            while(true)
-            {
-                sout.writeUTF("From server:"+str);
-                if(str.equals("quit"))
-                    break;
-                str=sin.readUTF();
-                System.out.println("Client Says:"+str);
-                if(str.equals("quit"))
-                    break;
-            }
-         }
-         catch(Exception e)
-         {
-            System.out.println("Error in C:"+e);
-         }
-    }
-}
+
  class practice
  {
     public static void main(String args[])
     {
-        ServerSocket ss;
+        DatagramSocket ds=null;
+        DatagramPacket dp=null,reply=null;
+        InetAddress shost=null;
         try
         {
-            Socket as;
-            ss=new ServerSocket(1234);
-            while(true)
-            {
-                System.out.println("Server waiting...");
-                as=ss.accept();
-                System.out.println("Client Connected...");
-                MultiClient obj=new MultiClient(as);
-                obj.start();
-            }
+            ds=new DatagramSocket();
+            shost=InetAddress.getByName("localhost");
+            byte buffer[]=new byte[1000];
+            byte[] m="Bye".getBytes();
+            dp=new DatagramPacket(m,m.length,shost,1234);
+            ds.send(dp);
+            reply=new DatagramPacket(buffer, buffer.length);
+            ds.receive(reply);
+            System.out.println((new String(reply.getData())).trim());
         }
         catch(Exception e)
         {
