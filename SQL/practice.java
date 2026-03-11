@@ -1,29 +1,77 @@
 import java.io.*;
-import java.net.*;
+import java.util.*;
 
- class practice
- {
+class SM
+{
+
+        int data;
+        boolean f=false;
+        public void put(int d)
+        {
+            try{
+                if(f==true)
+                    wait();
+                data=d;
+                System.out.println("Put:"+data);
+                f=true;
+                notify();
+            }
+            catch(Exception e)
+            {}
+        }
+        public void get()
+        {
+            try{
+                if(f==false)
+                    wait();
+                System.out.println("Get:"+data);
+                f=false;
+                notify();
+            }
+            catch(Exception e)
+            {}
+        }
+}
+class Producer extends Thread
+{
+    SM q;
+    public Producer(SM q)
+    {
+        this.q=q;
+    }
+    public void run()
+    {
+        int i=1;
+        while(true)
+        {
+            q.put(i);
+            i++;
+        }
+    }
+}
+class Consumer extends Thread
+{
+    SM q;
+    public Consumer(SM q)
+    {
+        this.q=q;
+    }
+    public void run()
+    {
+        while(true)
+        {
+            q.get();
+        }
+    }
+}
+class practice
+{
     public static void main(String args[])
     {
-        DatagramSocket ds=null;
-        DatagramPacket dp=null,reply=null;
-        InetAddress shost=null;
-        try
-        {
-            ds=new DatagramSocket();
-            shost=InetAddress.getByName("localhost");
-            byte buffer[]=new byte[1000];
-            byte[] m="Bye".getBytes();
-            dp=new DatagramPacket(m,m.length,shost,1234);
-            ds.send(dp);
-            reply=new DatagramPacket(buffer, buffer.length);
-            ds.receive(reply);
-            System.out.println((new String(reply.getData())).trim());
-        }
-        catch(Exception e)
-        {
-            System.out.println("Error:"+e);
-        }
-
+        SM q=new SM();
+        Producer p=new Producer(q);
+        Consumer c=new Consumer(q);
+        p.start();
+        c.start();
     }
- }
+}

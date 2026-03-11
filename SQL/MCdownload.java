@@ -31,7 +31,7 @@ public class MCdownload {
 
                     FileInputStream fin=new FileInputStream(fn);
                     int data;
-                    char ch;
+                    char ch; 
                     while ((data = fin.read()) != -1) {
                         ch = (char) data;  
                         sout.writeUTF(String.valueOf(ch));
