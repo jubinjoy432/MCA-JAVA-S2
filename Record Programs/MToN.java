@@ -12,6 +12,7 @@ public class MToN {
         while (i <= n) {
             System.out.print(i + " ");
             i++;
+            
         }
     }
 }

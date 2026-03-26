@@ -5,15 +5,15 @@ class FRead{
     {
         Scanner s;
         String fn;
-        FileInputStream fin;
         int ch;
         s= new Scanner(System.in);
         System.out.println("Enter the file name:");
         fn=s.nextLine();
         try{
             FileInputStream fin;
+            fin = new FileInputStream(fn);
             while(true)
-            {
+            {  
                 ch=fin.read();
                 if(ch==-1)
                     break;
